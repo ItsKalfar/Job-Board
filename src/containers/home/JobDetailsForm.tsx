@@ -1,10 +1,11 @@
 import { Button, Flex, Box } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import FormInput from "../../components/formComponents/FormInput";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { PageNumbers } from "../../interface/home";
 import { IJobDetails } from "../../interface/forms";
+import { useData } from "./DataProvider";
 
 const JobDetailsForm: React.FC<{
   handleTab: (n: PageNumbers) => void;
@@ -22,10 +23,25 @@ const JobDetailsForm: React.FC<{
         jobLocation: Yup.string().required("Job Location is required"),
       }),
       onSubmit: (values) => {
-        console.log({ values });
         handleTab(2);
       },
     });
+
+  const data = useData();
+
+  useEffect(() => {
+    const handleJobDetails = () => {
+      data?.setState({
+        ...data.state,
+        jobDetails: {
+          jobDetails: values.jobDetails,
+          jobLocation: values.jobLocation,
+          jobTitle: values.jobTitle,
+        },
+      });
+    };
+    handleJobDetails();
+  }, [values]);
 
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>

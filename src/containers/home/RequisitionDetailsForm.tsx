@@ -1,5 +1,5 @@
 import { Button, Flex, Box } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import FormInput from "../../components/formComponents/FormInput";
 import FormSelect from "../../components/formComponents/FormSelect";
 import { useFormik } from "formik";
@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { PageNumbers } from "../../interface/home";
 import { IRequisitionDetails } from "../../interface/forms";
 import { genderOptions, urgencyOptions } from "./constants";
+import { useData } from "./DataProvider";
 
 const RequisitionDetailsForm: React.FC<{
   handleTab: (n: PageNumbers) => void;
@@ -27,6 +28,7 @@ const RequisitionDetailsForm: React.FC<{
       urgency: "",
       gender: "",
     },
+
     validationSchema: Yup.object().shape({
       requisitionTitle: Yup.string().required("Requisition title is required"),
       noOfOpenings: Yup.number()
@@ -38,10 +40,26 @@ const RequisitionDetailsForm: React.FC<{
       gender: Yup.string().required("Gender is required"),
     }),
     onSubmit: (values) => {
-      console.log({ values });
       handleTab(1);
     },
   });
+
+  const data = useData();
+
+  useEffect(() => {
+    const handleRequistionDetails = () => {
+      data?.setState({
+        ...data.state,
+        requisitionDetails: {
+          gender: values.gender,
+          noOfOpenings: values.noOfOpenings,
+          requisitionTitle: values.requisitionTitle,
+          urgency: values.urgency,
+        },
+      });
+    };
+    handleRequistionDetails();
+  }, [values]);
 
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>

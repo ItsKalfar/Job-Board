@@ -1,5 +1,5 @@
 import { Button, Flex, Box } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import FormSelect from "../../components/formComponents/FormSelect";
 import { useFormik } from "formik";
 import { PageNumbers } from "../../interface/home";
@@ -10,6 +10,7 @@ import {
   interviewModeOptions,
 } from "./constants";
 import * as Yup from "yup";
+import { useData } from "./DataProvider";
 
 const InterviewDetailsForm: React.FC<{
   handleTab: (n: PageNumbers) => void;
@@ -35,10 +36,25 @@ const InterviewDetailsForm: React.FC<{
       interviewLanguage: Yup.string().required("Interviw language is required"),
     }),
     onSubmit: (values) => {
-      console.log({ values });
       alert("Form successfully submitted");
     },
   });
+
+  const data = useData();
+
+  useEffect(() => {
+    const handleInterviewSettings = () => {
+      data?.setState({
+        ...data.state,
+        interviewSettings: {
+          interviewDuration: values.interviewDuration,
+          interviewLanguage: values.interviewLanguage,
+          interviewMode: values.interviewMode,
+        },
+      });
+    };
+    handleInterviewSettings();
+  }, [values]);
 
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
