@@ -1,0 +1,20 @@
+Title: Unable to proceed from job details page
+
+Description:
+When I click on a next button after filling all the deatails on the requisition details page, it takes me to the job details page. However, even with all the details, it would not proceed to the next page after pressing the next button.
+
+Expected Result:
+A user should be able to move to the next page after filling all the details.
+
+Actual Result:
+Job details page not proceeding further even after pressing the Next button after providing all the information
+
+System Information:
+Operating System: Windows 10
+Browser: Google Chrome
+
+Severity:
+This bug is of moderate severity as it prevents users from proceeding further from job details page.
+
+Bug Fix:
+Upon investigation, I discovered that the issue was caused by an additional condition defined in the validationSchema. I removed that condition and was able to proceed from the job details page without any issues.
