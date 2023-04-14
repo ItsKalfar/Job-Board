@@ -20,7 +20,6 @@ const RequisitionDetailsForm: React.FC<{
     values,
     setFieldTouched,
     setFieldValue,
-    isValid,
   } = useFormik<IRequisitionDetails>({
     initialValues: {
       requisitionTitle: "",
@@ -39,6 +38,7 @@ const RequisitionDetailsForm: React.FC<{
       gender: Yup.string().required("Gender is required"),
     }),
     onSubmit: (values) => {
+      console.log({ values });
       handleTab(1);
     },
   });
