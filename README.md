@@ -19,8 +19,8 @@ The Hiring Card Generator is a web application that is used by the hiring team t
 To get started with the project, clone the repository and install dependencies using the following commands:
 
 ```
-git clone https://github.com/your-username/hiring-card-generator.git
-cd hiring-card-generator
+git clone https://github.com/ItsKalfar/Job-Board.git
+cd file name
 yarn
 ```
 
