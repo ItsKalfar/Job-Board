@@ -31,7 +31,3 @@ yarn run dev
 ```
 
 The development server should now be running on http://localhost:3000.
-
-## Live Demo
-
-To see the live demo of the web application [visit here!](https://job-board-two-eta.vercel.app/)
